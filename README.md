@@ -1,64 +1,61 @@
-# EX 03 Django ORM Web Application
+# Ex02 Django ORM Web Application
+## Date: 26-10-2024
 
 ## AIM
 To develop a Django application to store and retrieve data from a bank loan database using Object Relational Mapping(ORM).
 
 ## ENTITY RELATIONSHIP DIAGRAM
 
-![ORM(1)](https://github.com/user-attachments/assets/7303c463-2f53-4434-86e5-632330b17617)
+![Alt text](<Screenshot (3).png>)
 
 ## DESIGN STEPS
-## STEP 1:
+
+### STEP 1:
 Clone the problem from GitHub
 
-## STEP 2:
+### STEP 2:
 Create a new app in Django project
 
-## STEP 3:
+### STEP 3:
 Enter the code for admin.py and models.py
 
-## STEP 4:
+### STEP 4:
 Execute Django admin and create details for 10 books
 
 ## PROGRAM
-
-## Admin.py
-
 ```
-from django.contrib import admin
-from .models import Loan
+models.py
 
-@admin.register(Loan)
-class LoanAdmin(admin.ModelAdmin):
-    list_display = ('loan_id', 'customer_name', 'amount', 'interest_rate', 'duration_months', 'start_date')
-    search_fields = ('customer_name', 'loan_id')
-```
-
-## Models.py
-
-```
 from django.db import models
+from django.contrib import admin
+class BankLoan(models.Model):
+    Name = models.CharField(max_length=100)
+    Account_No = models.IntegerField(primary_key="Account_No")
+    Phone_Number = models.IntegerField()
+    Aadhar_No = models.IntegerField()
+    Loan_amount = models.FloatField()
+    Time_Period = models.IntegerField()
+     
+class BankAdmin(admin.ModelAdmin):
+    list_display = ('Name', 'Account_No', 'Phone_Number','Aadhar_No', 'Loan_amount', 'Time_Period',)
 
-class Loan(models.Model):
-    loan_id = models.AutoField(primary_key=True)  # Auto incrementing primary key
-    customer_name = models.CharField(max_length=100)
-    address = models.CharField(max_length=255)
-    phone_number = models.CharField(max_length=15)
-    email = models.EmailField()
-    amount = models.DecimalField(max_digits=10, decimal_places=2)
-    interest_rate = models.FloatField()
-    duration_months = models.PositiveIntegerField()
-    start_date = models.DateField()
 
-    def __str__(self):
-        return f"Loan ID: {self.loan_id} - {self.customer_name}"
+admin.py
+
+
+from django.contrib import admin
+from .models import BankLoan,BankAdmin 
+admin.site.register(BankLoan,BankAdmin)
+
 ```
+
 
 ## OUTPUT
 
-![Screenshot 2024-09-01 211854](https://github.com/user-attachments/assets/ccd126ae-3b9a-4a0a-a479-dd468b5691c7)
+Include the screenshot of your admin page.
 
-![Screenshot 2024-09-01 211840](https://github.com/user-attachments/assets/9c729a8b-7069-4770-b1af-72e28a5203a1)
+![Alt text](<Screenshot (2).png>)
+
 
 ## RESULT
 Thus the program for creating a database using ORM hass been executed successfully
